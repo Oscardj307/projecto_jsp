@@ -176,6 +176,7 @@ public class Persona {
             pst.setString(4, person.getDireccion());
             pst.setInt(5, person.getTelefono());
             pst.set(6, person.getTipo_empleado());
+             pst.setString(8, person.getComentarios());
             
             
             if (pst.executeUpdate()==1){
@@ -218,11 +219,17 @@ public class Persona {
         PreparedStatement pst=null;
         try {
             //String sql1= "insert into usuarios (user, nombre, contrasena,tipo_user) values ('"+usu+"','"+nombre+"','"+pass+"','"+tipo+"')";
-            String SQL= "insert into tb_personal (dui, nombre,apellido) values (?,?,?)";
+            String SQL= "insert into tb_personal (dui, nombre, apellido, direccion, email, tipo_empleado, comentarios) values (?,?,?,?,?,?,?)";
             pst = cnn.prepareStatement(SQL);
             pst.setString(1, this.dui);
-            pst.setString(2, this.nombres);
-            pst.setString(3, this.apellidos);
+            pst.setString(2, this.nombre);
+            pst.setString(3, this.apellido);
+            pst.setString(4, this.direccion);
+            pst.setString(5, this.email);
+            pst.setInt(6, this.telefono);
+            pst.char(7, this.tipo_empleado);
+            pst.setString(8, this.comentarios);
+            
             
             if (pst.executeUpdate()==1){
                 return true;
